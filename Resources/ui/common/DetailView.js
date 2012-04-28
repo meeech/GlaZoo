@@ -69,7 +69,8 @@ function imageRow(search) {
 function titleHeader (title, subtitle) {
 	var view = Ti.UI.createView({
         width: Ti.Platform.displayCaps.platformWidth,
-        height: 50
+        height: 50,
+        backgroundImage: 'images/detailHeader.png'
 	});
 	
     view.title = Ti.UI.createLabel({
@@ -195,13 +196,12 @@ function DetailView() {
 
     var table = Ti.UI.createTableView({
         backgroundColor: 'transparent',
-        headerView: titleHeader('', ''),
 	    footerView: Ti.UI.createView({height: 0}), 
 	    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		data:[]
 	});
 	self.add(table);
-	
+		
 	self.addEventListener('itemSelected', function(e) {
 	    Ti.API.debug('detailView itemSelected');
 
@@ -219,6 +219,12 @@ function DetailView() {
 	self.paint = function(item) {
 	    Ti.API.debug(item);
         var tableData = [];
+    
+    	var headerView = titleHeader();
+
+    	var section = Ti.UI.createTableViewSection({
+    	    headerView: headerView
+        });
         
         var title = item.common_name || '',
             subtitle = item.scientific_name || '';
@@ -228,14 +234,14 @@ function DetailView() {
             subtitle = '';
         }
 
-        table.headerView.title.text = title;
-        table.headerView.subtitle.text = subtitle;
+        headerView.title.text = title;
+        headerView.subtitle.text = subtitle;
         
-        tableData.push(imageRow(title));
+        section.add(imageRow(title));
                 
-        tableData.push(placeCollectedRow(item));
-        tableData.push(wikipediaRow(title));
-        table.setData(tableData);
+        section.add(placeCollectedRow(item));
+        section.add(wikipediaRow(title));
+        table.setData([section]);
 	};
 	
 	return self;
