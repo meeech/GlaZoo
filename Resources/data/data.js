@@ -873,14 +873,6 @@ var data = [
     },
     {
         "discipline": "FISH",
-        "common_name": "Arctic skate",
-        "scientific_name": "Raja (Ambrylyraja) hyperborea, Collet 1879",
-        "place": "NE North Atlantic, Faroes, Southern part of Faroes Channel (place collected)",
-        "lat": "60.02",
-        "lng": "5.42"
-    },
-    {
-        "discipline": "FISH",
         "common_name": "Roughhead Grenadier",
         "scientific_name": "Macrourus berglax, Lacepede 1801",
         "place": "NE North Atlantic, Faroes, to N (place collected)",
