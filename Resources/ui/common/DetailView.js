@@ -16,6 +16,55 @@ function subtitleRow(text) {
     return row;
 }
 
+function googleMapUrl (data) {
+    var lat = data.lat || false,
+        lng = data.lng || false,
+        named = data.named || false;
+    
+    var width = Ti.Platform.displayCaps.platformWidth - 20;
+    
+    var url;
+    if(named) {
+        url = 'http://maps.googleapis.com/maps/api/staticmap?markers='+named+'&center='+named+'&zoom=2&scale=1&size='+width+'x100&maptype=terrain&sensor=false';
+    }
+    else {
+        url = 'http://maps.googleapis.com/maps/api/staticmap?markers='+lat+','+lng+'&center='+lat+','+lng+'&zoom=2&scale=1&size='+width+'x100&maptype=terrain&sensor=false';
+    }
+
+    return url;
+}
+
+// http://maps.googleapis.com/maps/api/staticmap?center=Africa,%20Kotelu%20Ulamo&zoom=4&size=512x512&maptype=satellite&sensor=false
+function placeCollectedRow (item) {
+    var row = Ti.UI.createTableViewRow(),
+        lat = item.lat || false,
+        lng = item.lng || false,
+        map = false,
+        placeName = item.place,
+        imgUrl;
+
+    if(item.lat && item.lng) {
+        imgUrl = googleMapUrl({lat: lat, lng: lng});
+    }
+    else {
+        placeName.replace('(place collected)', '');
+        imgUrl = googleMapUrl({named: placeName});
+    }
+    
+    Ti.API.debug(imgUrl);
+    
+    map = Ti.UI.createImageView({
+        image: imgUrl,
+        height: 100,
+        width:Ti.Platform.displayCaps.platformWidth-20
+    });
+    
+    row.add(map);
+    
+    return row;
+
+}
+
 function DetailView() {
 	var self = Ti.UI.createView();
 
@@ -53,6 +102,7 @@ function DetailView() {
             tableData.push(subtitleRow(subtitle));
         }
         
+        tableData.push(placeCollectedRow(item));
         table.setData(tableData);
 	};
 	
