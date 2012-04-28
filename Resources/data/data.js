@@ -5521,7 +5521,7 @@ var data = [
     },
     {
         "discipline": "INVERTEBRATES: CNIDARIANS (JELLYFISH, ANEMONES, CORALS)",
-        "common_name": "Sea Anemone ?",
+        "common_name": "Sea Anemone",
         "scientific_name": "",
         "place": "NE North Atlantic, Rockall Trough, north of Hebridean Seamount, Barra Fan (place collected)",
         "lat": "56.507",

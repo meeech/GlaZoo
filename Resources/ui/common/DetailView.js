@@ -1,5 +1,55 @@
 var data = require('data/data').disciplines;
 
+function imageRow(search) {
+    var row = Ti.UI.createTableViewRow();
+
+    function unavail() {
+        var label = Ti.UI.createLabel({
+            text:'Image Unavailable',
+            font:{fontSize:14},
+            color:'#aaa',
+            left:10,
+            right: 10,
+            textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+            height:44
+        });
+        row.add(label);
+    };
+    
+    var getData = Titanium.Network.createHTTPClient();
+
+    getData.onload = function() {
+        var status = this.status;
+        Ti.API.debug(status);    
+        if((399 < status) && (600 > status)) {        
+            unavail();
+        }
+        else {
+            var response = JSON.parse(this.responseText);
+            var result = response.responseData.results[0];
+            Ti.API.debug(response.responseData.results);
+            if(!result) {
+                unavail();
+                return;
+            }
+            var ratio = result.width/Ti.Platform.displayCaps.platformWidth;
+            var itemImage = Ti.UI.createImageView({
+                defaultImage: 'images/hourglass.png',
+                image: result.url,
+                width:Ti.Platform.displayCaps.platformWidth,
+                height: result.height / ratio,
+                borderWidth: 1
+            });
+            row.add(itemImage);
+        }
+    };
+
+    getData.open("GET","https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="+search+"&as_sitesearch=commons.wikimedia.org&rsz=1&userip="+Ti.Platform.address);
+    getData.send();
+    
+    return row;
+}
+
 function titleRow(text) {
     var row = Ti.UI.createTableViewRow({
         title: text
@@ -16,38 +66,24 @@ function subtitleRow(text) {
     return row;
 }
 
-function googleMapUrl (data) {
-    var lat = data.lat || false,
-        lng = data.lng || false,
-        named = data.named || false;
-    
-    var width = Ti.Platform.displayCaps.platformWidth - 20;
-    
-    var url;
-    if(named) {
-        url = 'http://maps.googleapis.com/maps/api/staticmap?markers='+named+'&center='+named+'&zoom=2&scale=1&size='+width+'x100&maptype=terrain&sensor=false';
-    }
-    else {
-        url = 'http://maps.googleapis.com/maps/api/staticmap?markers='+lat+','+lng+'&center='+lat+','+lng+'&zoom=2&scale=1&size='+width+'x100&maptype=terrain&sensor=false';
-    }
-
-    return url;
-}
-
 // http://maps.googleapis.com/maps/api/staticmap?center=Africa,%20Kotelu%20Ulamo&zoom=4&size=512x512&maptype=satellite&sensor=false
 function placeCollectedRow (item) {
-    var row = Ti.UI.createTableViewRow(),
+    var row = Ti.UI.createTableViewRow({
+            layout: 'vertical'
+        }),
         lat = item.lat || false,
         lng = item.lng || false,
         map = false,
         placeName = item.place,
         imgUrl;
+        
+    var googleMapUrl = require('ui/common/Map').googleMapUrl;
 
     if(item.lat && item.lng) {
         imgUrl = googleMapUrl({lat: lat, lng: lng});
     }
     else {
-        placeName.replace('(place collected)', '');
+        placeName = placeName.replace('(place collected)', '');
         imgUrl = googleMapUrl({named: placeName});
     }
     
@@ -60,6 +96,18 @@ function placeCollectedRow (item) {
     });
     
     row.add(map);
+    
+    var label = Ti.UI.createLabel({
+        text:placeName,
+        font:{fontSize:11},
+        color:'#444',
+        top:10,
+        left: 10,
+        right: 10,
+        height:Ti.UI.SIZE
+    });
+    
+    row.add(label);
     
     return row;
 
@@ -96,6 +144,8 @@ function DetailView() {
             title = item.scientific_name;
             subtitle = '';
         }
+        
+        tableData.push(imageRow(title));
         
         tableData.push(titleRow(title));
         if('' != subtitle){
