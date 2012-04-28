@@ -92,7 +92,7 @@ function placeCollectedRow (item) {
     map = Ti.UI.createImageView({
         image: imgUrl,
         height: 100,
-        width:Ti.Platform.displayCaps.platformWidth-20
+        width:Ti.Platform.displayCaps.platformWidth
     });
     
     row.add(map);
@@ -102,6 +102,7 @@ function placeCollectedRow (item) {
         font:{fontSize:11},
         color:'#444',
         top:10,
+        bottom: 10,
         left: 10,
         right: 10,
         height:Ti.UI.SIZE
@@ -118,6 +119,7 @@ function DetailView() {
 
     var table = Ti.UI.createTableView({
 	    footerView: Ti.UI.createView({height: 0}), 
+	    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		data:[]
 	});
 	self.add(table);

@@ -1553,14 +1553,6 @@ var data = [
     },
     {
         "discipline": "FISH",
-        "common_name": "Aggasiz' smooth-head",
-        "scientific_name": "Alepocephalus agassizii, Good & Bean 1883",
-        "place": "NE North Atlantic, Rockall Trough (place collected)",
-        "lat": "56.49",
-        "lng": "10.03"
-    },
-    {
-        "discipline": "FISH",
         "common_name": "Round Ray",
         "scientific_name": "Raja (Rajella) fyllae, Luetken 1888",
         "place": "NE North Atlantic, Faroes Channel, West Ridge (place collected)",
