@@ -37,7 +37,7 @@ function imageRow(search) {
         else {
             var response = JSON.parse(this.responseText);
             var result = response.responseData.results[0];
-            Ti.API.debug(response.responseData.results);
+            // Ti.API.debug(response.responseData.results);
             if(!result) {
                 unavail();
                 return;
@@ -61,6 +61,44 @@ function imageRow(search) {
     getData.send();
     
     return row;
+}
+
+function titleHeader (title, subtitle) {
+	var view = Ti.UI.createView({
+        width: Ti.Platform.displayCaps.platformWidth,
+        height: 50
+	});
+	
+    view.title = Ti.UI.createLabel({
+        top: 0,
+        left: 10,
+        right: 10,
+        text:'',
+        font:{fontSize:23, fontFamily: 'Georgia'},
+        color:'#000',
+        shadowColor:"#fff",
+        shadowOffset:{x:0,y:1},
+        height:30
+    });
+
+    view.subtitle = Ti.UI.createLabel({
+        top: 25,
+        left: 10,
+        right: 10,
+        text:'',
+        font:{fontSize:15, fontFamily: 'Georgia'},
+        color:'#000',
+        shadowColor:"#fff",
+        shadowOffset:{x:0,y:1},
+        height:25,
+        width:Ti.Platform.displayCaps.platformWidth
+    });
+	
+    view.add(view.title);
+    view.add(view.subtitle);
+    
+	return view;
+
 }
 
 function titleRow(text) {
@@ -170,6 +208,7 @@ function DetailView() {
 
     var table = Ti.UI.createTableView({
         backgroundColor: 'transparent',
+        headerView: titleHeader('', ''),
 	    footerView: Ti.UI.createView({height: 0}), 
 	    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		data:[]
@@ -201,14 +240,12 @@ function DetailView() {
             title = item.scientific_name;
             subtitle = '';
         }
+
+        table.headerView.title.text = title;
+        table.headerView.subtitle.text = subtitle;
         
         tableData.push(imageRow(title));
-        
-        tableData.push(titleRow(title));
-        if('' != subtitle){
-            tableData.push(subtitleRow(subtitle));
-        }
-        
+                
         tableData.push(placeCollectedRow(item));
         tableData.push(wikipediaRow(title));
         table.setData(tableData);

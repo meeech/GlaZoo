@@ -8,7 +8,7 @@ function DisciplineView() {
 	var self = Ti.UI.createView({
 		backgroundColor:'transparent'
 	});
-	
+		
 	var table = Ti.UI.createTableView({
 		backgroundColor:'transparent',
 	    minRowHeight: 44,

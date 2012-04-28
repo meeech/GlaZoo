@@ -51,8 +51,8 @@ function ApplicationWindow() {
         backgroundColor: 'transparent',        
         backButtonTitle: 'Back',
         barImage: Theme.barImage,
-        barColor: Theme.barColor,
-        title:'Product Details'
+        barColor: Theme.barColor
+        // title:'Product Details'
     });
     detailContainerWindow.add(detailView);
     
@@ -75,7 +75,7 @@ function ApplicationWindow() {
     disciplineView.addEventListener('itemSelected', function(e) {
         Ti.API.debug('disciplineView itemselected');
 
-        detailContainerWindow.title = e.name;
+        // detailContainerWindow.title = e.name;
         detailView.fireEvent('itemSelected', {
             discipline: e.discipline,
             key: e.name
