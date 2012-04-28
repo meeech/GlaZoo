@@ -6734,6 +6734,11 @@ var disciplines = {};
 Ti.API.debug('parsing data');
 //build the indexedData
 data.forEach(function(item) {
+    
+    if(item.discipline.indexOf('INVERTEBRATES') > -1) {
+        item.discipline = 'INVERTEBRATES';
+    }
+
     if( undefined == disciplines[item.discipline]) {
         disciplines[item.discipline] = {};
     }
