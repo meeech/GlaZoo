@@ -66,7 +66,6 @@ function subtitleRow(text) {
     return row;
 }
 
-// http://maps.googleapis.com/maps/api/staticmap?center=Africa,%20Kotelu%20Ulamo&zoom=4&size=512x512&maptype=satellite&sensor=false
 function placeCollectedRow (item) {
     var row = Ti.UI.createTableViewRow({
             layout: 'vertical'
@@ -114,6 +113,32 @@ function placeCollectedRow (item) {
 
 }
 
+function wikipediaRow (text) {
+    var label = Ti.UI.createLabel({
+        text:'Learn more on Wikipedia...',
+        font:{fontSize:14},
+        color:'#0080FF',
+        left:10,
+        right: 10,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        height:44,
+        touchEnabled: false
+    });
+
+    var row = Ti.UI.createTableViewRow({
+        search: text,
+        selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+    });
+    
+    row.add(label);
+    
+    row.addEventListener('click', function(e) {
+        Ti.Platform.openURL('http://en.wikipedia.org/wiki/Special:Search?search='+e.rowData.search+'&go=Go');
+    });
+    
+    return row;
+}
+
 function DetailView() {
 	var self = Ti.UI.createView();
 
@@ -126,6 +151,9 @@ function DetailView() {
 	
 	self.addEventListener('itemSelected', function(e) {
 	    Ti.API.debug('detailView itemSelected');
+
+        //Clear out table...
+        table.setData([]);
 
 	    var item = data[e.discipline][e.key] || false;
 	    if(item == false) {
@@ -155,6 +183,7 @@ function DetailView() {
         }
         
         tableData.push(placeCollectedRow(item));
+        tableData.push(wikipediaRow(title));
         table.setData(tableData);
 	};
 	
