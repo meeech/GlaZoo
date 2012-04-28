@@ -92,7 +92,7 @@ function placeCollectedRow (item) {
     
     map = Ti.UI.createImageView({
         image: imgUrl,
-        defaultImage: 'images/clear.png',
+        defaultImage: 'images/placeholdermap.png',
         height: 100,
         width:Ti.Platform.displayCaps.platformWidth
     });
