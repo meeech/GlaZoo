@@ -5736,30 +5736,6 @@ var data = [
         "lng": "12.805"
     },
     {
-        "discipline": "MAMMALS",
-        "common_name": "Stoat (skull only)",
-        "scientific_name": "Mustela erminea, Linn 1758",
-        "place": "Scotland, Kircudbrightshire, Galloway (place collected)",
-        "lat": "-55.04",
-        "lng": "04.08"
-    },
-    {
-        "discipline": "MAMMALS",
-        "common_name": "Stoat (skull only)",
-        "scientific_name": "Mustela erminea, Linn 1758",
-        "place": "Scotland, Isle of Bute (place collected)",
-        "lat": "-55.05",
-        "lng": "05.00"
-    },
-    {
-        "discipline": "MAMMALS",
-        "common_name": "Weasel (skull only)",
-        "scientific_name": "Mustela nivalis, Linnaeus 1766",
-        "place": "Scotland, Roxburghshire, Kelso, Rutherford (place collected)",
-        "lat": "-55.02",
-        "lng": "02.32"
-    },
-    {
         "discipline": "INVERTEBRATES: BRYOZOANS (MOSS ANIMALS, SEA MATS)",
         "common_name": "Bryozoan",
         "scientific_name": "Alcyonidium gelatinosum (L. 1761)",
