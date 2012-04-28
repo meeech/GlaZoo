@@ -1,16 +1,20 @@
 //Master View Component Constructor
-var data = require('data/data');
+var data = require('data/data'),
+    tableUtil = require('ui/common/TableView');
 function MasterView() {
 	//create object instance, parasitic subclass of Observable
 	var self = Ti.UI.createView({
 		backgroundColor:'white'
 	});
 	
-	//some dummy data for our table view
     var tableData = [];
-    Object.keys(data.disciplines).sort().forEach(function(item) {
+        // tableIndex = [],
+        // lastIndexed = false;
+
+    Object.keys(data.disciplines).sort().forEach(function(item, index) {
         var row = Ti.UI.createTableViewRow({
-            hasChild: true
+            hasChild: true,
+            __searchindex: item //custom attrib to use with table search
         });
 
         row.label = Ti.UI.createLabel({
@@ -24,12 +28,20 @@ function MasterView() {
 
         row.add(row.label);
         tableData.push(row);
+        
+        // var toIndex = item[0].toUpperCase();
+        // if(toIndex !== lastIndexed) {
+        //     tableIndex.push({title: toIndex, index: index});
+        //     lastIndexed = toIndex;
+        // }
     });
 	
 	var table = Ti.UI.createTableView({
 	    minRowHeight: 44,
+        // index: tableIndex,
 		data:tableData
 	});
+    tableUtil.addSearch(table);
 	self.add(table);
 	
 	//add behavior

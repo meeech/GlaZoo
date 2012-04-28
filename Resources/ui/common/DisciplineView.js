@@ -1,5 +1,7 @@
-//Master View Component Constructor
-var data = require('data/data');
+//Discipline View Component Constructor
+var data = require('data/data'),
+        tableUtil = require('ui/common/TableView');
+
 function DisciplineView() {
 	//create object instance, parasitic subclass of Observable
 	var self = Ti.UI.createView({
@@ -10,6 +12,7 @@ function DisciplineView() {
 	    minRowHeight: 44,
 		data:[]
 	});
+    tableUtil.addSearch(table);
 	self.add(table);
 	
 	self.paint = function(discipline) {
@@ -17,7 +20,8 @@ function DisciplineView() {
         Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
             var row = Ti.UI.createTableViewRow({
                 hasChild: true,
-                discipline: discipline
+                discipline: discipline,
+                __searchindex: item
             });
 
             row.label = Ti.UI.createLabel({
