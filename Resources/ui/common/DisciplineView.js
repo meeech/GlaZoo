@@ -10,6 +10,7 @@ function DisciplineView() {
 	
 	var table = Ti.UI.createTableView({
 	    minRowHeight: 44,
+	    footerView: Ti.UI.createView({height: 0}), 
 		data:[]
 	});
     tableUtil.addSearch(table);
