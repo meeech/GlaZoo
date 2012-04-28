@@ -74,18 +74,20 @@ function placeCollectedRow (item) {
         lng = item.lng || false,
         map = false,
         placeName = item.place,
-        imgUrl;
+        imgUrl,
+        mapParam;
         
-    var googleMapUrl = require('ui/common/Map').googleMapUrl;
+    var googleStaticMapUrl = require('ui/common/Map').googleStaticMapUrl,
+        googleMapUrl = require('ui/common/Map').googleMapUrl;
 
     if(item.lat && item.lng) {
-        imgUrl = googleMapUrl({lat: lat, lng: lng});
+        mapParam = {lat: lat, lng: lng};
     }
     else {
         placeName = placeName.replace('(place collected)', '');
-        imgUrl = googleMapUrl({named: placeName});
+        mapParam = {named: placeName};
     }
-    
+    imgUrl = googleStaticMapUrl(mapParam);    
     Ti.API.debug(imgUrl);
     
     map = Ti.UI.createImageView({
@@ -94,10 +96,15 @@ function placeCollectedRow (item) {
         width:Ti.Platform.displayCaps.platformWidth
     });
     
+    map.addEventListener('click', function() {
+        Ti.Platform.openURL(googleMapUrl(mapParam));
+    });
+
     row.add(map);
     
     var label = Ti.UI.createLabel({
         text:placeName,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         font:{fontSize:11},
         color:'#444',
         top:10,

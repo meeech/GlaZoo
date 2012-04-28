@@ -1,4 +1,4 @@
-exports.googleMapUrl = function(data) {
+exports.googleStaticMapUrl = function(data) {
     var lat = data.lat || false,
         lng = data.lng || false,
         named = data.named || false;
@@ -15,4 +15,22 @@ exports.googleMapUrl = function(data) {
     }
 
     return url;
+};
+
+
+exports.googleMapUrl = function(data) {
+
+    var lat = data.lat || false,
+        lng = data.lng || false,
+        named = data.named || false,
+        q;
+    
+    if(named) {
+        q = named;
+    }
+    else {
+        q = ''+lat+','+lng;
+    }
+    return 'http://maps.google.com/maps?q='+q;
+    
 };
