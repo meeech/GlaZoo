@@ -1,14 +1,16 @@
 //Discipline View Component Constructor
 var data = require('data/data'),
-        tableUtil = require('ui/common/TableView');
+        tableUtil = require('ui/common/TableView'),
+        Theme = require('ui/common/Theme');
 
 function DisciplineView() {
 	//create object instance, parasitic subclass of Observable
 	var self = Ti.UI.createView({
-		backgroundColor:'white'
+		backgroundColor:'transparent'
 	});
 	
 	var table = Ti.UI.createTableView({
+		backgroundColor:'transparent',
 	    minRowHeight: 44,
 	    footerView: Ti.UI.createView({height: 0}), 
 		data:[]
@@ -23,6 +25,7 @@ function DisciplineView() {
         var tableData = [];
         Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
             var row = Ti.UI.createTableViewRow({
+                backgroundImage: Theme.tableRowBg,
                 hasChild: true,
                 discipline: discipline,
                 __searchindex: item
@@ -30,8 +33,10 @@ function DisciplineView() {
 
             row.label = Ti.UI.createLabel({
                 text:item,
-                font:{fontSize:15},
-                color:'#333',
+                font:{fontSize:19, fontFamily: 'Georgia'},
+                shadowColor:"#fff",
+                shadowOffset:{x:0,y:1},
+                color:'#000',
                 height:Ti.UI.SIZE,
                 left: 10,
                 right: 10

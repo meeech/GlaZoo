@@ -1,4 +1,5 @@
-var data = require('data/data').disciplines;
+var data = require('data/data').disciplines,
+    Theme = require('ui/common/Theme');
 
 //Build the player outside function so it executes on load,
 //this triggers error early, so no delay when we go to play.
@@ -8,13 +9,15 @@ function playSound() {
 }
 
 function imageRow(search) {
-    var row = Ti.UI.createTableViewRow();
+    var row = Ti.UI.createTableViewRow({
+        backgroundImage: Theme.tableRowBg
+    });
 
     function unavail() {
         var label = Ti.UI.createLabel({
             text:'Image Unavailable',
-            font:{fontSize:14},
-            color:'#aaa',
+            font:{fontSize:16, fontFamily: 'Georgia'},
+            color:'#000',
             left:10,
             right: 10,
             textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -62,7 +65,8 @@ function imageRow(search) {
 
 function titleRow(text) {
     var row = Ti.UI.createTableViewRow({
-        title: text
+        title: text,
+        backgroundImage: Theme.tableRowBg        
     });
 
     return row;
@@ -70,7 +74,8 @@ function titleRow(text) {
 
 function subtitleRow(text) {
     var row = Ti.UI.createTableViewRow({
-        title: text
+        title: text,
+        backgroundImage: Theme.tableRowBg
     });
     
     return row;
@@ -78,7 +83,8 @@ function subtitleRow(text) {
 
 function placeCollectedRow (item) {
     var row = Ti.UI.createTableViewRow({
-            layout: 'vertical'
+            layout: 'vertical',
+            backgroundImage: Theme.tableRowBg
         }),
         lat = item.lat || false,
         lng = item.lng || false,
@@ -117,8 +123,8 @@ function placeCollectedRow (item) {
     var label = Ti.UI.createLabel({
         text:placeName,
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        font:{fontSize:11},
-        color:'#444',
+        font:{fontSize:14, fontFamily: 'Georgia'},
+        color:'#222',
         top:10,
         bottom: 10,
         left: 10,
@@ -135,7 +141,7 @@ function placeCollectedRow (item) {
 function wikipediaRow (text) {
     var label = Ti.UI.createLabel({
         text:'Learn more on Wikipedia...',
-        font:{fontSize:14},
+        font:{fontSize:17, fontFamily: 'Georgia'},
         color:'#0080FF',
         left:10,
         right: 10,
@@ -145,6 +151,7 @@ function wikipediaRow (text) {
     });
 
     var row = Ti.UI.createTableViewRow({
+        backgroundImage: Theme.tableRowBg,
         search: text,
         selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
     });
@@ -162,6 +169,7 @@ function DetailView() {
 	var self = Ti.UI.createView();
 
     var table = Ti.UI.createTableView({
+        backgroundColor: 'transparent',
 	    footerView: Ti.UI.createView({height: 0}), 
 	    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		data:[]
