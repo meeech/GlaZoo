@@ -1,6 +1,6 @@
 //Master View Component Constructor
 var data = require('data/data');
-function MasterView() {
+function DisciplineView() {
 	//create object instance, parasitic subclass of Observable
 	var self = Ti.UI.createView({
 		backgroundColor:'white'
@@ -12,7 +12,7 @@ function MasterView() {
         var row = Ti.UI.createTableViewRow({
             hasChild: true
         });
-
+    
         row.label = Ti.UI.createLabel({
             text:item,
             font:{fontSize:15},
@@ -21,11 +21,11 @@ function MasterView() {
             left: 10,
             right: 10
         });
-
+    
         row.add(row.label);
         tableData.push(row);
     });
-	
+
 	var table = Ti.UI.createTableView({
 	    minRowHeight: 44,
 		data:tableData
@@ -34,7 +34,7 @@ function MasterView() {
 	
 	//add behavior
 	table.addEventListener('click', function(e) {
-        Ti.API.debug('masterView Table Click');
+	    Ti.API.debug('disciplineView Click');
 		self.fireEvent('itemSelected', {
 			name:e.row.label.text
 		});
@@ -43,4 +43,4 @@ function MasterView() {
 	return self;
 };
 
-module.exports = MasterView;
+module.exports = DisciplineView;

@@ -1,0 +1,1 @@
+exports.barColor = '#666';

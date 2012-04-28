@@ -10,7 +10,8 @@ function DetailView() {
 	self.add(lbl);
 	
 	self.addEventListener('itemSelected', function(e) {
-		lbl.text = e.name+': $'+e.price;
+	    Ti.API.debug('detailView itemSelected');
+		lbl.text = e.name;
 	});
 	
 	return self;
