@@ -59,15 +59,7 @@ function ApplicationWindow() {
             key: e.name
         });
         navGroup.open(detailContainerWindow);
-        // detailView.paint(e.discipline, e.name);
     });
-
-    // detailView.addEventListener('itemSelected', function(e) {
-    //     Ti.API.debug('detailView itemselected');
-    //     // detailView.fireEvent('itemSelected',e);
-    //     detailContainerWindow.title = e.name;
-    //     navGroup.open(detailContainerWindow);       
-    // });
     
     return self;
 };
