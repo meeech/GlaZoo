@@ -17,14 +17,16 @@ function ApplicationWindow() {
     //create master view container
     var masterContainerWindow = Ti.UI.createWindow({
         barColor: Theme.barColor,
-        title:'Disciplines'
+        title:'Disciplines',
+        navBarHidden: true
     });
     masterContainerWindow.add(masterView);
     
     //create detail view container
     var disciplineContainerWindow = Ti.UI.createWindow({
         barColor: Theme.barColor,
-        title:'DisciplineView'
+        title:'DisciplineView',
+        navBarHidden: false
     });
     disciplineContainerWindow.add(disciplineView);
 

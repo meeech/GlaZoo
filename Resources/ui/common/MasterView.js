@@ -37,11 +37,12 @@ function MasterView() {
     });
 	
 	var table = Ti.UI.createTableView({
-	    minRowHeight: 44,
+	    rowHeight: 77,
+	    footerView: Ti.UI.createView({height: 0}), 
         // index: tableIndex,
 		data:tableData
 	});
-    tableUtil.addSearch(table);
+    // tableUtil.addSearch(table);
 	self.add(table);
 	
 	//add behavior
