@@ -17,6 +17,9 @@ function DisciplineView() {
 	self.add(table);
 	
 	self.paint = function(discipline) {
+        //Avoid flash of old content
+        table.setData([]);
+
         var tableData = [];
         Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
             var row = Ti.UI.createTableViewRow({
