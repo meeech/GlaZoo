@@ -25,6 +25,7 @@ function DisciplineView() {
         var tableData = [];
         Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
             var row = Ti.UI.createTableViewRow({
+                selectedBackgroundColor: Theme.barColor,
                 backgroundImage: Theme.tableRowBg,
                 hasChild: true,
                 discipline: discipline,

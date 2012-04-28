@@ -14,6 +14,7 @@ function MasterView() {
 
     Object.keys(data.disciplines).sort().forEach(function(item, index) {
         var row = Ti.UI.createTableViewRow({
+            selectedBackgroundColor: Theme.barColor,
             backgroundImage: Theme.tableRowBg,
             leftImage: 'images/icon_'+ item.toLowerCase() +'.png',
             hasChild: true,

@@ -47,7 +47,7 @@ function imageRow(search) {
                 borderRadius: 10,
                 defaultImage: 'images/clear.png',
                 image: result.url,
-                top: 10,
+                top: 5,
                 bottom: 10,
                 width:Ti.Platform.displayCaps.platformWidth-20,
                 height: result.height / ratio,
@@ -70,7 +70,7 @@ function titleHeader (title, subtitle) {
 	var view = Ti.UI.createView({
         width: Ti.Platform.displayCaps.platformWidth,
         height: 50,
-        backgroundImage: 'images/detailHeader.png'
+        backgroundImage: Theme.detailHeaderBg
 	});
 	
     view.title = Ti.UI.createLabel({
@@ -179,7 +179,7 @@ function wikipediaRow (text) {
     var row = Ti.UI.createTableViewRow({
         backgroundImage: Theme.tableRowBg,
         search: text,
-        selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+        selectedBackgroundColor: Theme.barColor
     });
     
     row.add(label);

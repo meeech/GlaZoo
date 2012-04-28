@@ -37,8 +37,8 @@ function ApplicationWindow() {
     disciplineContainerWindow.titleLabel = Ti.UI.createLabel({
         text:'',
         font:{fontSize:23, fontFamily: 'Georgia'},
-        color:'#fff',
-        shadowColor:"#000",
+        color:'#000',
+        shadowColor:"#fff",
         shadowOffset:{x:0,y:1},
         height:Ti.UI.SIZE,
         width: Ti.UI.SIZE
