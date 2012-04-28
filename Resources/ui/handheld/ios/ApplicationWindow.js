@@ -47,6 +47,7 @@ function ApplicationWindow() {
         // disciplineView.fireEvent('itemSelected',e);
         disciplineContainerWindow.title = e.name;
 		navGroup.open(disciplineContainerWindow);
+        disciplineView.paint(e.name);
 	});
 	
     disciplineView.addEventListener('itemSelected', function(e) {

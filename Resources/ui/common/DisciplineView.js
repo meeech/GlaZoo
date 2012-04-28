@@ -7,30 +7,33 @@ function DisciplineView() {
 	});
 	
 	//some dummy data for our table view
-    var tableData = [];
-    Object.keys(data.disciplines).sort().forEach(function(item) {
-        var row = Ti.UI.createTableViewRow({
-            hasChild: true
-        });
-    
-        row.label = Ti.UI.createLabel({
-            text:item,
-            font:{fontSize:15},
-            color:'#333',
-            height:Ti.UI.SIZE,
-            left: 10,
-            right: 10
-        });
-    
-        row.add(row.label);
-        tableData.push(row);
-    });
-
 	var table = Ti.UI.createTableView({
 	    minRowHeight: 44,
-		data:tableData
+		data:[]
 	});
 	self.add(table);
+	
+	self.paint = function(discipline) {
+        var tableData = [];
+        Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
+            var row = Ti.UI.createTableViewRow({
+                hasChild: true
+            });
+
+            row.label = Ti.UI.createLabel({
+                text:item,
+                font:{fontSize:15},
+                color:'#333',
+                height:Ti.UI.SIZE,
+                left: 10,
+                right: 10
+            });
+
+            row.add(row.label);
+            tableData.push(row);
+        });
+        table.setData(tableData);
+	};
 	
 	//add behavior
 	table.addEventListener('click', function(e) {
