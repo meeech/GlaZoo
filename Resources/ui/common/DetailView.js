@@ -34,7 +34,7 @@ function imageRow(search) {
             }
             var ratio = result.width/Ti.Platform.displayCaps.platformWidth;
             var itemImage = Ti.UI.createImageView({
-                defaultImage: 'images/hourglass.png',
+                defaultImage: 'images/clear.png',
                 image: result.url,
                 width:Ti.Platform.displayCaps.platformWidth,
                 height: result.height / ratio,
@@ -73,30 +73,32 @@ function placeCollectedRow (item) {
         lat = item.lat || false,
         lng = item.lng || false,
         map = false,
-        placeName = item.place,
+        placeName = item.place.replace('(place collected)', ''),
         imgUrl,
         mapParam;
         
     var googleStaticMapUrl = require('ui/common/Map').googleStaticMapUrl,
         googleMapUrl = require('ui/common/Map').googleMapUrl;
 
-    if(item.lat && item.lng) {
-        mapParam = {lat: lat, lng: lng};
-    }
-    else {
-        placeName = placeName.replace('(place collected)', '');
+    if('unverified' != placeName) {
         mapParam = {named: placeName};
     }
+    else {
+        mapParam = {lat: lat, lng: lng};
+    }
+
     imgUrl = googleStaticMapUrl(mapParam);    
     Ti.API.debug(imgUrl);
     
     map = Ti.UI.createImageView({
         image: imgUrl,
+        defaultImage: 'images/clear.png',
         height: 100,
         width:Ti.Platform.displayCaps.platformWidth
     });
     
     map.addEventListener('click', function() {
+        //Prefer placeName - lon/lat aint great
         Ti.Platform.openURL(googleMapUrl(mapParam));
     });
 
