@@ -5624,14 +5624,6 @@ var data = [
         "lng": "9.582"
     },
     {
-        "discipline": "INVERTEBRATES: ECHINODERMS (STARFISH, SEA URCHINS)",
-        "common_name": "",
-        "scientific_name": "",
-        "place": "NE North Atlantic, Rockall Trough, north of Hebridean Seamount, Barra Fan (place collected)",
-        "lat": "56.507",
-        "lng": "9.582"
-    },
-    {
         "discipline": "INVERTEBRATES: CRUSTACEANS (CRABS, LOBSTER, SHRIMP, WOODLICE)",
         "common_name": "Shrimp",
         "scientific_name": "",

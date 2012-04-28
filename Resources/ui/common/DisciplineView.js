@@ -6,7 +6,6 @@ function DisciplineView() {
 		backgroundColor:'white'
 	});
 	
-	//some dummy data for our table view
 	var table = Ti.UI.createTableView({
 	    minRowHeight: 44,
 		data:[]
@@ -17,7 +16,8 @@ function DisciplineView() {
         var tableData = [];
         Object.keys(data.disciplines[discipline]).sort().forEach(function(item) {
             var row = Ti.UI.createTableViewRow({
-                hasChild: true
+                hasChild: true,
+                discipline: discipline
             });
 
             row.label = Ti.UI.createLabel({
@@ -37,8 +37,10 @@ function DisciplineView() {
 	
 	//add behavior
 	table.addEventListener('click', function(e) {
+
 	    Ti.API.debug('disciplineView Click');
 		self.fireEvent('itemSelected', {
+		    discipline: e.rowData.discipline,
 			name:e.row.label.text
 		});
 	});
