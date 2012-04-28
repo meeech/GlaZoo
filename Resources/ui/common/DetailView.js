@@ -18,14 +18,6 @@ function subtitleRow(text) {
 
 function DetailView() {
 	var self = Ti.UI.createView();
-	
-	var lbl = Ti.UI.createLabel({
-		text:'Please select an item',
-		height:'auto',
-		width:'auto',
-		color:'#000'
-	});
-	self.add(lbl);
 
     var table = Ti.UI.createTableView({
 	    footerView: Ti.UI.createView({height: 0}), 
@@ -35,19 +27,17 @@ function DetailView() {
 	
 	self.addEventListener('itemSelected', function(e) {
 	    Ti.API.debug('detailView itemSelected');
-        Ti.API.debug(e);
-	    
+
 	    var item = data[e.discipline][e.key] || false;
 	    if(item == false) {
 	        Ti.API.error('Item not found');
 	        return;
 	    }
-	    Ti.API.error(item);
         self.paint(item);
-		lbl.text = e.key;
 	});
 	
 	self.paint = function(item) {
+	    Ti.API.debug(item);
         var tableData = [];
         
         var title = item.common_name || '',
