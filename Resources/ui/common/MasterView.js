@@ -2,11 +2,11 @@
 var data = require('data/data'),
     tableUtil = require('ui/common/TableView');
 function MasterView() {
-	//create object instance, parasitic subclass of Observable
-	var self = Ti.UI.createView({
-		backgroundColor:'white'
-	});
-	
+    //create object instance, parasitic subclass of Observable
+    var self = Ti.UI.createView({
+        backgroundColor:'white'
+    });
+    
     var tableData = [];
         // tableIndex = [],
         // lastIndexed = false;
@@ -35,25 +35,25 @@ function MasterView() {
         //     lastIndexed = toIndex;
         // }
     });
-	
-	var table = Ti.UI.createTableView({
-	    rowHeight: 77,
-	    footerView: Ti.UI.createView({height: 0}), 
+    
+    var table = Ti.UI.createTableView({
+        rowHeight: 77,
+        footerView: Ti.UI.createView({height: 0}), 
         // index: tableIndex,
-		data:tableData
-	});
+        data:tableData
+    });
     // tableUtil.addSearch(table);
-	self.add(table);
-	
-	//add behavior
-	table.addEventListener('click', function(e) {
+    self.add(table);
+    
+    //add behavior
+    table.addEventListener('click', function(e) {
         Ti.API.debug('masterView Table Click');
-		self.fireEvent('itemSelected', {
-			name:e.row.label.text
-		});
-	});
-	
-	return self;
+        self.fireEvent('itemSelected', {
+            name:e.row.label.text
+        });
+    });
+    
+    return self;
 };
 
 module.exports = MasterView;

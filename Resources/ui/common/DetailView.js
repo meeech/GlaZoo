@@ -1,5 +1,12 @@
 var data = require('data/data').disciplines;
 
+//Build the player outside function so it executes on load,
+//this triggers error early, so no delay when we go to play.
+var player = Ti.Media.createSound({url:"/sounds/sheep.wav", volume: 1.0});
+function playSound() {
+    player.play();
+}
+
 function imageRow(search) {
     var row = Ti.UI.createTableViewRow();
 
@@ -41,6 +48,9 @@ function imageRow(search) {
                 borderWidth: 1
             });
             row.add(itemImage);
+            
+            itemImage.addEventListener('click', playSound);
+            
         }
     };
 
