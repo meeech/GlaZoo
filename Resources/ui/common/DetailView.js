@@ -42,11 +42,14 @@ function imageRow(search) {
                 unavail();
                 return;
             }
-            var ratio = result.width/Ti.Platform.displayCaps.platformWidth;
+            var ratio = result.width/(Ti.Platform.displayCaps.platformWidth-20);
             var itemImage = Ti.UI.createImageView({
+                borderRadius: 10,
                 defaultImage: 'images/clear.png',
                 image: result.url,
-                width:Ti.Platform.displayCaps.platformWidth,
+                top: 10,
+                bottom: 10,
+                width:Ti.Platform.displayCaps.platformWidth-20,
                 height: result.height / ratio,
                 borderWidth: 1
             });
@@ -101,24 +104,6 @@ function titleHeader (title, subtitle) {
 
 }
 
-function titleRow(text) {
-    var row = Ti.UI.createTableViewRow({
-        title: text,
-        backgroundImage: Theme.tableRowBg        
-    });
-
-    return row;
-}
-
-function subtitleRow(text) {
-    var row = Ti.UI.createTableViewRow({
-        title: text,
-        backgroundImage: Theme.tableRowBg
-    });
-    
-    return row;
-}
-
 function placeCollectedRow (item) {
     var row = Ti.UI.createTableViewRow({
             layout: 'vertical',
@@ -148,7 +133,9 @@ function placeCollectedRow (item) {
         image: imgUrl,
         defaultImage: 'images/placeholdermap.png',
         height: 100,
-        width:Ti.Platform.displayCaps.platformWidth
+        borderRadius: 10,
+        borderWidth: 1,
+        width:Ti.Platform.displayCaps.platformWidth-20
     });
     
     map.addEventListener('click', function() {

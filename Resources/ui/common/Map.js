@@ -3,7 +3,7 @@ exports.googleStaticMapUrl = function(data) {
         lng = data.lng || false,
         named = data.named || false;
     
-    var width = Ti.Platform.displayCaps.platformWidth,
+    var width = Ti.Platform.displayCaps.platformWidth-20,
         zoom = 1;
     
     var url;
